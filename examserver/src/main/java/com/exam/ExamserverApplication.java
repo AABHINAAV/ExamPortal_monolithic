@@ -27,29 +27,29 @@ public class ExamserverApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("starting code");
-		
-		User user1 = new User();
-		
-		user1.setFirstName("Abhinav");
-		user1.setLastName("Garg");
-		user1.setUsername("abhinavgarg");
-		user1.setPassword("password");
-		user1.setEmail("abhinavgarg@gmail.com");
-		
-		Role role1 = new Role();
-		role1.setRoleId(44L);
-		role1.setRoleName("ADMIN");
-		
-		UserRole userRole1 = new UserRole();
-		userRole1.setUser(user1);
-		userRole1.setRole(role1);
-		
-		Set<UserRole> userRoleSet = new HashSet<>();
-		userRoleSet.add(userRole1);
-		
-		User res = this.userService.createUser(user1, userRoleSet);
-		
-		System.out.println(res.getEmail());
+//		
+//		User user1 = new User();
+//		
+//		user1.setFirstName("Abhinav");
+//		user1.setLastName("Garg");
+//		user1.setUsername("abhinavgarg");
+//		user1.setPassword("password");
+//		user1.setEmail("abhinavgarg@gmail.com");
+//		
+//		Role role1 = new Role();
+//		role1.setRoleId(44L);
+//		role1.setRoleName("ADMIN");
+//		
+//		UserRole userRole1 = new UserRole();
+//		userRole1.setUser(user1);
+//		userRole1.setRole(role1);
+//		
+//		Set<UserRole> userRoleSet = new HashSet<>();
+//		userRoleSet.add(userRole1);
+//		
+//		User res = this.userService.createUser(user1, userRoleSet);
+//		
+//		System.out.println(res.getEmail());
 	}
 
 }

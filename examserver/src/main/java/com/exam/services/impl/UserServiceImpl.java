@@ -1,5 +1,6 @@
 package com.exam.services.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.exam.models.UserRole;
 import com.exam.repo.RoleRepository;
 import com.exam.repo.UserRepository;
 import com.exam.services.UserService;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -38,4 +40,36 @@ public class UserServiceImpl implements UserService {
 		return local;
 	}
 
+	@Override
+	public List<User> getAllUsers() throws Exception {
+		// TODO Auto-generated method stub
+		List<User> allUsers = this.userRepository.findAll();
+		return allUsers;
+	}
+
+	@Override
+	public User getUser(String userName) throws Exception {
+		// TODO Auto-generated method stub
+		User user = this.userRepository.findByUsername(userName);
+		if(user == null)
+		{
+			System.out.println("No such user present!!!!!!!!!!!!!!!!");
+			throw new Exception("No such user present!!!!!!!!!!!!!!!!");
+		}
+		
+		return user;
+	}
+
+//	@Override
+//	public void deleteUser(Long userId) {
+//		// TODO Auto-generated method stub
+//		System.out.println(userId);
+//		this.userRepository.deleteById(userId);
+//	}
+	@Override
+	public void deleteUser(String userName) {
+		// TODO Auto-generated method stub
+		System.out.println(userName);
+		this.userRepository.deleteByUsername(userName);
+	}
 }
