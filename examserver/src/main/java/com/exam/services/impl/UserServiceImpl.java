@@ -60,16 +60,16 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-//	@Override
-//	public void deleteUser(Long userId) {
-//		// TODO Auto-generated method stub
-//		System.out.println(userId);
-//		this.userRepository.deleteById(userId);
-//	}
 	@Override
-	public void deleteUser(String userName) {
+	public void deleteUserByUserId(Long userId) {
 		// TODO Auto-generated method stub
-		System.out.println(userName);
+		System.out.println("deleting user on basis of user id : " + userId);
+		this.userRepository.deleteById(userId);
+	}
+	@Override
+	public void deleteUserByUserName(String userName) {
+		// TODO Auto-generated method stub
+		System.out.println("deleting user on basis of user name : " + userName);
 		this.userRepository.deleteByUsername(userName);
 	}
 }

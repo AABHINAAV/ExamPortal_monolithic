@@ -27,47 +27,48 @@ import com.exam.services.UserService;
 @RequestMapping("/user")
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	// creating user
-	@PostMapping("/createUser")
-	public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
-		// we have user
-		// making role
-		Role role = new Role();
-		role.setRoleId(45L);
-		role.setRoleName("NORMAL");
+    // creating user
+    @PostMapping("/createUser")
+    public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
+        // we have user
+        // making role
+        Role role = new Role();
+        role.setRoleId(45L);
+        role.setRoleName("NORMAL");
 
-		Set<UserRole> userRoles = new HashSet<>();
-		UserRole userRole = new UserRole();
-		userRole.setUser(user);
-		userRole.setRole(role);
-		userRoles.add(userRole);
+        Set<UserRole> userRoles = new HashSet<>();
+        UserRole userRole = new UserRole();
+        userRole.setUser(user);
+        userRole.setRole(role);
+        userRoles.add(userRole);
 
-		User res = this.userService.createUser(user, userRoles);
+        User res = this.userService.createUser(user, userRoles);
 
-		return new ResponseEntity<User>(res, HttpStatus.OK);
-	}
+        return new ResponseEntity<User>(res, HttpStatus.OK);
+    }
 
-	@GetMapping("/getAllUsers")
-	public ResponseEntity<List<User>> getAllUsers() throws Exception {
-		List<User> res = this.userService.getAllUsers();
-		return new ResponseEntity<List<User>>(res, HttpStatus.OK);
-	}
-	
-	@GetMapping("/getUser/{username}")
-	public ResponseEntity<User> getUser(@PathVariable("username") String username) throws Exception{
-		User res = this.userService.getUser(username);
-		return new ResponseEntity<User>(res, HttpStatus.OK);
-	}
-	
-//	@DeleteMapping("/deleteUser/{userId}")
-//	public void deleteUser(@PathVariable("userId") Long userId){
-//		this.userService.deleteUser(userId);
-//	}	
-	@DeleteMapping("/deleteUser/{userName}")
-	public void deleteUser(@PathVariable("userName") String userName){
-		this.userService.deleteUser(userName);
-	}
+    @GetMapping("/getAllUsers")
+    public ResponseEntity<List<User>> getAllUsers() throws Exception {
+        List<User> res = this.userService.getAllUsers();
+        return new ResponseEntity<List<User>>(res, HttpStatus.OK);
+    }
+
+    @GetMapping("/getUser/{username}")
+    public ResponseEntity<User> getUser(@PathVariable("username") String username) throws Exception {
+        User res = this.userService.getUser(username);
+        return new ResponseEntity<User>(res, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteUserByUserId/{userId}")
+    public void deleteUserByUserId(@PathVariable("userId") Long userId) {
+        this.userService.deleteUserByUserId(userId);
+    }
+
+    @DeleteMapping("/deleteUserByUserName/{userName}")
+    public void deleteUserByUserName(@PathVariable("userName") String userName) {
+        this.userService.deleteUserByUserName(userName);
+    }
 }
