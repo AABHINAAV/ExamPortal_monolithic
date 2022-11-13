@@ -10,13 +10,7 @@ import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.exam.models.Role;
 import com.exam.models.User;
@@ -25,6 +19,7 @@ import com.exam.services.UserService;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -34,6 +29,9 @@ public class UserController {
     @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
         // we have user
+        // setting its profile
+        user.setProfile("default.png");
+
         // making role
         Role role = new Role();
         role.setRoleId(45L);
@@ -63,12 +61,14 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteUserByUserId/{userId}")
-    public void deleteUserByUserId(@PathVariable("userId") Long userId) {
+    public ResponseEntity<String> deleteUserByUserId(@PathVariable("userId") Long userId) {
         this.userService.deleteUserByUserId(userId);
+        return new ResponseEntity<>("User with user id : " + userId + " has been deleted successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteUserByUserName/{userName}")
-    public void deleteUserByUserName(@PathVariable("userName") String userName) {
+    public ResponseEntity<String> deleteUserByUserName(@PathVariable("userName") String userName) {
         this.userService.deleteUserByUserName(userName);
+        return new ResponseEntity<>("User with username : " + userName + " has been deleted successfully", HttpStatus.OK);
     }
 }
