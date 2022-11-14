@@ -99,7 +99,7 @@ public class User implements UserDetails {
             authorities.add(new Authority(userRole.getRole().getRoleName()));
         });
 
-        return null;
+        return authorities;
     }
 
     public String getPassword() {
