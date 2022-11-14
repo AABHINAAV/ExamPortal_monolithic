@@ -26,7 +26,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
+
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
