@@ -46,9 +46,23 @@ export class LoginComponent implements OnInit {
 
     // request to server to generate for token
     this.loginServiceObj.generateToken(this.loginData).subscribe(
-      (res) => {
+      (res: any) => {
         console.log('SUCCESS');
         console.log(res);
+
+        //login the user
+        this.loginServiceObj.loginUser(res.token);
+
+        // getting user details of current logged in user
+        this.loginServiceObj.getCurrentUser().subscribe(
+          (data: any) => {
+            this.loginServiceObj.setUserDetails(data);
+            console.log(data);
+
+            // redirect ... ADMIN : admin-dashboard
+            // redirect ... NORMAL : normal-dashboard
+          }
+        );
       },
       (err) => {
         console.log('ERROR');

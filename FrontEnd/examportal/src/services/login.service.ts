@@ -22,6 +22,13 @@ export class LoginService {
     localStorage.setItem('token', token);
     return true;
   }
+  
+  // 
+  // 
+  // get current user : which is logged in
+  public getCurrentUser(){
+    return this.http.get(`${baseUrl}/current-user`);
+  }
 
   //
   //
