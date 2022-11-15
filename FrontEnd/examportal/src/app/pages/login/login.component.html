@@ -3,14 +3,13 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <mat-card>
-            
           <div class="container text-center">
             <img src="../../../assets/images/logo.png" alt="" />
           </div>
 
           <h1 class="text-center">Login Here !!!</h1>
 
-          <form>
+          <form (ngSubmit)="formSubmit()">
             <!-- username field -->
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>User Name</mat-label>
@@ -19,6 +18,7 @@
                 placeholder="Enter here"
                 required
                 name="username"
+                [(ngModel)]="loginData.username"
                 matInput
               />
               <mat-hint>Valid User name</mat-hint>
@@ -32,6 +32,7 @@
                 placeholder="Enter here"
                 required
                 name="password"
+                [(ngModel)]="loginData.password"
                 matInput
               />
             </mat-form-field>
@@ -40,7 +41,7 @@
               <button type="submit" mat-raised-button color="primary">
                 Login
               </button>
-              <button class="ml10" mat-raised-button color="accent">
+              <button class="ml10" mat-raised-button color="accent" (click)="resetFieldsFunction()">
                 Reset
               </button>
             </div>
