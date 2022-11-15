@@ -25,6 +25,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './pages/home/home.component';
 import { authInterceptorProviders } from 'src/services/auth.interceptor';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { authInterceptorProviders } from 'src/services/auth.interceptor';
     SignupComponent,
     LoginComponent,
     HomeComponent,
+    AdminDashboardComponent,
+    UserDashboardComponent,
   ],
   imports: [
     BrowserModule,
