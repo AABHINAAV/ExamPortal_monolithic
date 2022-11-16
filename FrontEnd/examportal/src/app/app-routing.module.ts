@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from 'src/services/angularGuard/admin.guard';
+import { UserGuard } from 'src/services/angularGuard/user.guard';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -26,12 +28,14 @@ const routes: Routes = [
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
     pathMatch: 'full',
+    canActivate: [AdminGuard],
   },
   {
     path: 'user-dashboard',
     component: UserDashboardComponent,
     pathMatch: 'full',
-  }
+    canActivate: [UserGuard],
+  },
 ];
 
 @NgModule({

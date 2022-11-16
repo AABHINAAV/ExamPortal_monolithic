@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" style="margin-bottom: 20px;">
+<mat-toolbar color="primary" style="margin-bottom: 20px">
   <a
     routerLink="/"
     mat-icon-button
@@ -10,19 +10,32 @@
   <span>Exam Portal</span>
   <span class="example-spacer"></span>
   <a
+    *ngIf="!loginServiceObj.isLoggedIn()"
     routerLink="/login"
     mat-icon-button
-    class="example-icon favorite-icon mr20"
+    class="example-icon favorite-icon mr10"
     aria-label="Example icon-button with heart icon"
+    routerLinkActive="activeLinkClass"
   >
     Login
   </a>
   <a
+    *ngIf="!loginServiceObj.isLoggedIn()"
     routerLink="/signup"
     mat-icon-button
-    class="example-icon favorite-icon mr20 ml20"
+    class="example-icon favorite-icon ml10 mr20"
     aria-label="Example icon-button with share icon"
+    routerLinkActive="activeLinkClass"
   >
     Register
+  </a>
+  <a
+    *ngIf="loginServiceObj.isLoggedIn()"
+    mat-icon-button
+    class="example-icon favorite-icon ml10 mr20"
+    aria-label="Example icon-button with share icon"
+    (click)="logOutUser()"
+  >
+    LogOut
   </a>
 </mat-toolbar>
