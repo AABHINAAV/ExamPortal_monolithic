@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import baseUrl from './helper';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
+public loginStatusSubject = new Subject<boolean>();
+
   constructor(private http: HttpClient) {}
 
   //
@@ -22,11 +25,11 @@ export class LoginService {
     localStorage.setItem('token', token);
     return true;
   }
-  
-  // 
-  // 
+
+  //
+  //
   // get current user : which is logged in
-  public getCurrentUser(){
+  public getCurrentUser() {
     return this.http.get(`${baseUrl}/current-user`);
   }
 
@@ -47,6 +50,7 @@ export class LoginService {
   public logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    this.loginStatusSubject.next(false);
     return true;
   }
 
@@ -62,6 +66,7 @@ export class LoginService {
   // set user details
   public setUserDetails(user: any) {
     localStorage.setItem('user', JSON.stringify(user));
+    this.loginStatusSubject.next(true);
   }
 
   //
@@ -70,17 +75,18 @@ export class LoginService {
   public getUserDetails() {
     let userStr = localStorage.getItem('user');
     if (userStr != null) {
-      return JSON.parse(userStr);
+      let res = JSON.parse(userStr);
+      return res;
     } else {
       this.logout();
       return null;
     }
   }
 
-  // 
-  // 
+  //
+  //
   // get user role
-  public getUserRole(){
+  public getUserRole() {
     let userDetails = this.getUserDetails();
     return userDetails.authorities[0].authority;
   }
