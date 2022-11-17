@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.loginServiceObj.loginStatusSubject.asObservable().subscribe((data) => {
       if (data == false) {
+        this.isLoggedIn = false;
+        this.userDetails = null;
         return;
       }
       this.isLoggedIn = this.loginServiceObj.isLoggedIn();
@@ -25,8 +27,6 @@ export class NavbarComponent implements OnInit {
 
   logOutUser() {
     this.loginServiceObj.logout();
-    this.isLoggedIn = false;
-    this.userDetails = null;
     this.router.navigate(['/login']);
   }
 }

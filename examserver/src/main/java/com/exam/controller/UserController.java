@@ -6,10 +6,12 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import com.exam.CustomExceptions.UserCustomException;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.exam.models.Role;
@@ -25,12 +27,29 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    //
+    //
+    // exeption handling
+    @ExceptionHandler(UserCustomException.class)
+    public ResponseEntity<?> exceptionHandler(UserCustomException e) {
+        return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    //
+    //
+    //
+
     // creating user
     @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
         // we have user
         // setting its profile
         user.setProfile("default.png");
+
+        // encoding password with BCryptPasswordEncode
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 
         // making role
         Role role = new Role();

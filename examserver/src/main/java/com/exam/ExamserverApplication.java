@@ -12,12 +12,16 @@ import com.exam.models.Role;
 import com.exam.models.User;
 import com.exam.models.UserRole;
 import com.exam.services.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class ExamserverApplication implements CommandLineRunner {
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ExamserverApplication.class, args);
@@ -34,7 +38,8 @@ public class ExamserverApplication implements CommandLineRunner {
 //		user1.setFirstName("Fname");
 //		user1.setLastName("Lname");
 //		user1.setUsername("fname_lname");
-//		user1.setPassword("fname_lname_password");
+//		String password = "fname_lname_password";
+//		user1.setPassword(this.bCryptPasswordEncoder.encode(password));
 //		user1.setEmail("fname_lname@gmail.com");
 //		user1.setPhone("9999999999");
 //		user1.setProfile("fname_lname.jpg");

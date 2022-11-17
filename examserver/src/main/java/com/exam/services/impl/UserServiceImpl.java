@@ -3,6 +3,7 @@ package com.exam.services.impl;
 import java.util.List;
 import java.util.Set;
 
+import com.exam.CustomExceptions.UserCustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +24,12 @@ public class UserServiceImpl implements UserService {
 	private RoleRepository roleRepository;
 
 	@Override
-	public User createUser(User user, Set<UserRole> userRoles) throws Exception {
+	public User createUser(User user, Set<UserRole> userRoles) throws UserCustomException {
 		User local = this.userRepository.findByUsername(user.getUsername());
 
 		if (local != null) {
-			System.out.println("User is already present !!");
-			throw new Exception("User is already present !!");
+			System.out.println("User is already present with this Username. Try another Username !!");
+			throw new UserCustomException("User is already present with this Username. Try another Username !!");
 		} else {
 			for (UserRole singleUserRole : userRoles) {
 				roleRepository.save(singleUserRole.getRole());
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
 			System.out.println("No such user present!!!!!!!!!!!!!!!!");
 			throw new Exception("No such user present!!!!!!!!!!!!!!!!");
 		}
-		
+
 		return user;
 	}
 
