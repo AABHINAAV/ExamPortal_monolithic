@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { HttpClientModule } from '@angular/common/http';
 //
 // material ui apis
@@ -27,6 +30,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { authInterceptorProviders } from 'src/services/auth.interceptor';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,9 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
     HomeComponent,
     AdminDashboardComponent,
     UserDashboardComponent,
+    ProfileComponent,
+    SidebarComponent,
+    AdminHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +58,7 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
     MatToolbarModule,
     MatIconModule,
     FormsModule,
+    MatListModule,
   ],
   providers: [
     {

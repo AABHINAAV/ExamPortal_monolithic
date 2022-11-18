@@ -14,6 +14,8 @@ export class NavbarComponent implements OnInit {
   constructor(private loginServiceObj: LoginService, private router: Router) {}
 
   ngOnInit(): void {
+    // it will be called only when there is any change in value 
+    // it happens only during login and log out
     this.loginServiceObj.loginStatusSubject.asObservable().subscribe((data) => {
       if (data == false) {
         this.isLoggedIn = false;
@@ -23,6 +25,13 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = this.loginServiceObj.isLoggedIn();
       this.userDetails = this.loginServiceObj.getUserDetails();
     });
+
+    //
+    //
+    // it will be called everytime so that if page get some changes it also gets updated
+    this.isLoggedIn = this.loginServiceObj.isLoggedIn();
+    this.userDetails = this.loginServiceObj.getUserDetails();
+    
   }
 
   logOutUser() {

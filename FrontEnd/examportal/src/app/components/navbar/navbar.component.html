@@ -9,7 +9,7 @@
   </a>
   <span>Exam Portal</span>
   <span class="example-spacer"></span>
-  <div *ngIf="!isLoggedIn">
+  <div *ngIf="isLoggedIn==false && userDetails==null">
     <a
       routerLink="/login"
       mat-icon-button
