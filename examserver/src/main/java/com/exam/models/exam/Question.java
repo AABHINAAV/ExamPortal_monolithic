@@ -18,7 +18,7 @@ public class Question {
     private String option4;
     private String answer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Quiz quiz;
 
     public Question() {
