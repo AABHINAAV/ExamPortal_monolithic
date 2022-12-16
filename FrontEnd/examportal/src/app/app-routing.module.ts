@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from 'src/services/angularGuard/admin.guard';
 import { UserGuard } from 'src/services/angularGuard/user.guard';
+import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -38,6 +40,14 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+      },
+      {
+        path: 'categories',
+        component: ViewCategoriesComponent,
+      },
+      {
+        path: 'add_category',
+        component: AddCategoryComponent,
       },
     ],
   },

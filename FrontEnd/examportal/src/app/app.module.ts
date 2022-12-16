@@ -31,6 +31,8 @@ import { authInterceptorProviders } from 'src/services/auth.interceptor';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { MatListModule } from '@angular/material/list';
+import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
+import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { MatListModule } from '@angular/material/list';
     ProfileComponent,
     SidebarComponent,
     AdminHomeComponent,
+    ViewCategoriesComponent,
+    AddCategoryComponent,
   ],
   imports: [
     BrowserModule,
