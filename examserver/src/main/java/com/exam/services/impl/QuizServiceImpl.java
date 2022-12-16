@@ -4,10 +4,12 @@ import com.exam.models.exam.Quiz;
 import com.exam.repo.QuizRepository;
 import com.exam.services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class QuizServiceImpl implements QuizService {
 
     @Autowired
