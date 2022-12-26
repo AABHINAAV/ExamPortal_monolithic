@@ -16,7 +16,7 @@ export class AddQuizComponent implements OnInit {
     totalQuestion: '',
     maxMarks: '',
     minMarks: '',
-    isActive: true,
+    active: true,
     category: {
       cid: '',
     },
@@ -50,7 +50,6 @@ export class AddQuizComponent implements OnInit {
     this.categoryServiceObj.getAllCategories().subscribe(
       (res: any) => {
         this.categories = res;
-        // console.log(this.categories);
       },
       (err) => {
         Swal.fire('Error!!', 'Error in loading categories list', 'error');
@@ -160,7 +159,7 @@ export class AddQuizComponent implements OnInit {
       totalQuestion: '',
       maxMarks: '',
       minMarks: '',
-      isActive: true,
+      active: true,
       category: {
         cid: '',
       },

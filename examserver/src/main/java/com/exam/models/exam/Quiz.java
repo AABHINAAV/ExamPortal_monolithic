@@ -15,11 +15,13 @@ public class Quiz {
     private Long qID;
 
     private String title;
+
+    @Column(length = 5000)
     private String description;
     private String totalQuestion;
     private String maxMarks;
     private String minMarks;
-    private boolean isActive = false;
+    private boolean isActive;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
@@ -29,6 +31,7 @@ public class Quiz {
     private Set<Question> questions = new LinkedHashSet<>();
 
     public Quiz() {
+        super();
     }
 
     public Quiz(Long qID, String title, String description, String totalQuestion, String maxMarks, String minMarks, boolean isActive, Category category, Set<Question> questions) {
@@ -41,6 +44,21 @@ public class Quiz {
         this.isActive = isActive;
         this.category = category;
         this.questions = questions;
+    }
+
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "qID=" + qID +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", totalQuestion='" + totalQuestion + '\'' +
+                ", maxMarks='" + maxMarks + '\'' +
+                ", minMarks='" + minMarks + '\'' +
+                ", isActive=" + isActive +
+                ", category=" + category +
+                ", questions=" + questions +
+                '}';
     }
 
     public Long getqID() {
