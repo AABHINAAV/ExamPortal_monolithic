@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from 'src/services/angularGuard/admin.guard';
 import { UserGuard } from 'src/services/angularGuard/user.guard';
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
+import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
+import { ViewQuizesComponent } from './pages/admin/view-quizes/view-quizes.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -42,12 +44,20 @@ const routes: Routes = [
         component: ProfileComponent,
       },
       {
-        path: 'categories',
+        path: 'view_categories',
         component: ViewCategoriesComponent,
       },
       {
         path: 'add_category',
         component: AddCategoryComponent,
+      },
+      {
+        path: 'view_quizes',
+        component: ViewQuizesComponent,
+      },
+      {
+        path: 'add_quiz',
+        component: AddQuizComponent,
       },
     ],
   },

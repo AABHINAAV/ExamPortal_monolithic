@@ -33,6 +33,10 @@ import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboa
 import { MatListModule } from '@angular/material/list';
 import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
+import { ViewQuizesComponent } from './pages/admin/view-quizes/view-quizes.component';
+import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -48,6 +52,8 @@ import { AddCategoryComponent } from './pages/admin/add-category/add-category.co
     AdminHomeComponent,
     ViewCategoriesComponent,
     AddCategoryComponent,
+    ViewQuizesComponent,
+    AddQuizComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +69,8 @@ import { AddCategoryComponent } from './pages/admin/add-category/add-category.co
     MatIconModule,
     FormsModule,
     MatListModule,
+    MatSlideToggleModule,
+    MatSelectModule,
   ],
   providers: [
     {
