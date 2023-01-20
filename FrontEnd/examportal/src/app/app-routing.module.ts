@@ -8,6 +8,7 @@ import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-das
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
 import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
+import { ViewQuizQuestionsComponent } from './pages/admin/view-quiz-questions/view-quiz-questions.component';
 import { ViewQuizesComponent } from './pages/admin/view-quizes/view-quizes.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -63,6 +64,10 @@ const routes: Routes = [
       {
         path: 'update_quiz/:quizId',
         component: UpdateQuizComponent,
+      },
+      {
+        path: 'view_quiz_questions/quizId_/:quizId/quizTitle_/:quizTitle',
+        component: ViewQuizQuestionsComponent,
       },
     ],
   },

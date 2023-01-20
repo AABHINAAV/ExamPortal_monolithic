@@ -39,23 +39,31 @@ public class QuestionController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    // get all Question
+    // get all Question of all quizes
     @GetMapping("/getAllQuestions")
     public ResponseEntity<Set<Question>> getAllQuestions() {
         Set<Question> res = this.questionService.getAllQuestions();
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    // get Question
+    // get single Question according to question id
     @GetMapping("/getQuestion/{questionId}")
     public ResponseEntity<Question> getQuestion(@PathVariable("questionId") Long questionId) {
         Question res = this.questionService.getQuestion(questionId);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    // get question of specific quiz
-    @GetMapping("/getQuestionsOfQuiz/{quizId}")
-    public ResponseEntity<?> getQuestionsOfQuiz(@PathVariable("quizId") Long quizId) {
+    // get all questions of specific quiz
+    @GetMapping("/getAllQuestionsOfQuiz/{quizId}")
+    public ResponseEntity<?> getAllQuestionsOfQuiz(@PathVariable("quizId") Long quizId){
+        Quiz quiz = this.quizService.getQuiz(quizId);
+        Set<Question> questions = quiz.getQuestions();
+        return new ResponseEntity<>(questions, HttpStatus.OK);
+    }
+
+    // get required questions of specific quiz
+    @GetMapping("/getRequiredQuestionsOfQuiz/{quizId}")
+    public ResponseEntity<?> getRequiredQuestionsOfQuiz(@PathVariable("quizId") Long quizId) {
         Quiz quiz = this.quizService.getQuiz(quizId);
         Set<Question> questionsSet = quiz.getQuestions();
         List questionList = new ArrayList(questionsSet);

@@ -42,6 +42,9 @@
       mat-flat-button
       color="accent"
       style="margin-left: 1rem; margin-bottom: 10px"
+      [routerLink]="
+        '/admin-dashboard/view_quiz_questions/quizId_/' + q.qID + '/quizTitle_/' + q.title
+      "
     >
       Questions
     </button>
