@@ -5,13 +5,14 @@ import { QuestionService } from 'src/services/question.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-add-quiz-question',
-  templateUrl: './add-quiz-question.component.html',
-  styleUrls: ['./add-quiz-question.component.css'],
+  selector: 'app-update-quiz-question',
+  templateUrl: './update-quiz-question.component.html',
+  styleUrls: ['./update-quiz-question.component.css'],
 })
-export class AddQuizQuestionComponent implements OnInit {
-  quizId = '';
-  quizTitle = '';
+export class UpdateQuizQuestionComponent implements OnInit {
+  quizId: any;
+  quizTitle: any;
+  questionId: any;
 
   questionData = {
     quiz: {
@@ -27,18 +28,28 @@ export class AddQuizQuestionComponent implements OnInit {
 
   constructor(
     private activatedRouteObj: ActivatedRoute,
-    private snackBarObj: MatSnackBar,
     private questionServiceObj: QuestionService,
+    private snackBarObj: MatSnackBar,
     private routerObj: Router
   ) {}
 
   ngOnInit(): void {
     this.quizId = this.activatedRouteObj.snapshot.params['quizId'];
     this.quizTitle = this.activatedRouteObj.snapshot.params['quizTitle'];
-    this.questionData.quiz['qID'] = this.quizId;
+    this.questionId = this.activatedRouteObj.snapshot.params['questionId'];
+
+    this.questionServiceObj.getQuestion(this.questionId).subscribe(
+      (res: any) => {
+        // console.log(res);
+        this.questionData = res;
+      },
+      (err) => {
+        Swal.fire('Error!', 'Error in loading current question', 'error');
+      }
+    );
   }
 
-  addNewQuestionFunc() {
+  updateQuestionFunc() {
     // console.log(this.questionData);
     // content
     if (
@@ -123,30 +134,37 @@ export class AddQuizQuestionComponent implements OnInit {
       return;
     }
 
-    this.questionServiceObj.addQuestion(this.questionData).subscribe(
-      (res) => {
-        // console.log(res);
-        this.clearAllFieldsFun();
-        Swal.fire({
-          title: '<h1>Good job!</h1>',
-          icon: 'success',
-          html: 'Quiz is successfully added!!',
-        }).then((result) => {
-          this.routerObj.navigate([
-            '/admin-dashboard/view_quiz_questions/quizId_/' +
-              this.quizId +
-              '/quizTitle_/' +
-              this.quizTitle,
-          ]);
-        });
-      },
-      (err) => {
-        this.clearAllFieldsFun();
-        this.snackBarObj.open(err.error.message, '', {
-          duration: 3000,
-        });
+    Swal.fire({
+      icon: 'info',
+      title: 'Do you really want to update this quiz?',
+      confirmButtonText: 'Update',
+      confirmButtonColor: 'Blue',
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.questionServiceObj.updateQuestion(this.questionData).subscribe(
+          (res: any) => {
+            Swal.fire({
+              title: '<h1>Good job!</h1>',
+              icon: 'success',
+              html: 'Question is successfully updated!!',
+            }).then((result) => {
+              this.routerObj.navigate([
+                '/admin-dashboard/view_quiz_questions/quizId_/' +
+                  this.quizId +
+                  '/quizTitle_/' +
+                  this.quizTitle,
+              ]);
+            });
+          },
+          (err) => {
+            this.snackBarObj.open(err.error.message, '', {
+              duration: 3000,
+            });
+          }
+        );
       }
-    );
+    });
   }
 
   clearAllFieldsFun() {

@@ -6,7 +6,10 @@
       <div class="container text-center">
         <button
           [routerLink]="
-            '/admin-dashboard/add_question/quizId_/' + quizId + '/quizTitle_/' + quizTitle
+            '/admin-dashboard/add_question/quizId_/' +
+            quizId +
+            '/quizTitle_/' +
+            quizTitle
           "
           mat-raised-button
           color="primary"
@@ -55,7 +58,20 @@
           >
             Delete
           </button>
-          <button mat-raised-button color="accent">Update</button>
+          <button
+            mat-raised-button
+            color="accent"
+            [routerLink]="
+              '/admin-dashboard/update_question/quizId_/' +
+              quizId +
+              '/quizTitle_/' +
+              quizTitle +
+              '/questionId_/ ' +
+              q.quesId
+            "
+          >
+            Update
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

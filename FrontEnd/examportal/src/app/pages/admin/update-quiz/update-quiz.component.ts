@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/services/category.service';
 import { QuizService } from 'src/services/quiz.service';
 import Swal from 'sweetalert2';
@@ -47,7 +47,8 @@ export class UpdateQuizComponent implements OnInit {
     private activatedRouteObj: ActivatedRoute,
     private quizServiceObj: QuizService,
     private categoryServiceObj: CategoryService,
-    private snackBarObj: MatSnackBar
+    private snackBarObj: MatSnackBar,
+    private routerObj: Router
   ) {}
 
   ngOnInit(): void {
@@ -87,7 +88,9 @@ export class UpdateQuizComponent implements OnInit {
             Swal.fire({
               title: '<h1>Good job!</h1>',
               icon: 'success',
-              html: 'Quiz is successfully updated!!',
+              html: 'Question is successfully updated!!',
+            }).then((result) => {
+              this.routerObj.navigate(['/admin-dashboard/view_quizes']);
             });
           },
           (err) => {
@@ -98,5 +101,19 @@ export class UpdateQuizComponent implements OnInit {
         );
       }
     });
+  }
+
+  clearAllFieldsFun() {
+    this.quizData = {
+      title: '',
+      description: '',
+      totalQuestion: '',
+      maxMarks: '',
+      minMarks: '',
+      active: true,
+      category: {
+        cid: '',
+      },
+    };
   }
 }
