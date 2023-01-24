@@ -32,7 +32,7 @@ export class QuestionService {
     return this.http.get(`${baseUrl}/question/getRequiredQuestionsOfQuiz/${quizId}`);
   }
 
-  deleteQuestion(questionId: any){
-    this.http.delete(`${baseUrl}/question/deleteQuestion/${questionId}`);
+  deleteQuestionByQuestionId(questionId: any){
+    return this.http.delete(`${baseUrl}/question/deleteQuestion/${questionId}`);
   }
 }

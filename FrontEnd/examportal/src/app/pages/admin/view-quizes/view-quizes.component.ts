@@ -68,7 +68,8 @@ export class ViewQuizesComponent implements OnInit {
             Swal.fire('Success', 'Quiz deleted successfully', 'success');
           },
           (err) => {
-            Swal.fire('Error!!', 'Error in loading data', 'error');
+            console.log(err);
+            Swal.fire('Error!!', 'Error in deleting quiz', 'error');
           }
         );
       }

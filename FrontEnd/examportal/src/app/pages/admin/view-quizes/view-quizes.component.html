@@ -1,3 +1,13 @@
+<div class="container text-center" style="margin-bottom: 20px">
+  <button
+    routerLink="/admin-dashboard/add_quiz"
+    mat-raised-button
+    color="primary"
+  >
+    Add New Quiz
+  </button>
+</div>
+
 <mat-card
   *ngFor="let q of quizes"
   style="margin-top: 10px; margin-left: 20px; margin-right: 20px"
@@ -43,7 +53,10 @@
       color="accent"
       style="margin-left: 1rem; margin-bottom: 10px"
       [routerLink]="
-        '/admin-dashboard/view_quiz_questions/quizId_/' + q.qID + '/quizTitle_/' + q.title
+        '/admin-dashboard/view_quiz_questions/quizId_/' +
+        q.qID +
+        '/quizTitle_/' +
+        q.title
       "
     >
       Questions
@@ -73,13 +86,3 @@
     </button>
   </mat-card-actions>
 </mat-card>
-
-<div class="container text-center" style="margin-top: 20px">
-  <button
-    routerLink="/admin-dashboard/add_quiz"
-    mat-raised-button
-    color="primary"
-  >
-    Add New Quiz
-  </button>
-</div>
