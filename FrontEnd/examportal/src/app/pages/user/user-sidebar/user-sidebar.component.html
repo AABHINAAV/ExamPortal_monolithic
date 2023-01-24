@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-action-list>
+    <div mat-subheader>Menu</div>
+
+    <!-- home button -->
+    <button mat-list-item routerLink="/user-dashboard">
+      <mat-icon mat-list-icon>home</mat-icon>
+      Home
+    </button>
+
+    <!-- profile button -->
+    <button mat-list-item routerLink="/user-dashboard/profile">
+      <mat-icon mat-list-icon>account_circle</mat-icon>
+      Profile
+    </button>
+
+    <!-- All Quizes button -->
+    <button mat-list-item routerLink="/user-dashboard/load_quizes/categoryId_/0">
+      <mat-icon mat-list-icon>list</mat-icon>
+      All Quizes
+    </button>
+
+    <!-- categories button -->
+    <button
+    mat-list-item
+    *ngFor="let c of categories"
+      [routerLink]="'/user-dashboard/load_quizes/categoryId_/' + c.cid"
+    >
+      <mat-icon mat-list-icon> quiz </mat-icon>
+      {{ c.title }}
+    </button>
+  </mat-action-list>
+</mat-card>

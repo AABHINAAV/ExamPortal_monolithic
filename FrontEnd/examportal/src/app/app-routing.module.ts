@@ -17,6 +17,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { LoadQuizComponent } from './pages/user/user_pages/load-quiz/load-quiz.component';
 
 const routes: Routes = [
   {
@@ -84,8 +85,17 @@ const routes: Routes = [
   {
     path: 'user-dashboard',
     component: UserDashboardComponent,
-    pathMatch: 'full',
     canActivate: [UserGuard],
+    children: [
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
+        path: 'load_quizes/categoryId_/:categoryId',
+        component: LoadQuizComponent
+      }
+    ],
   },
 ];
 
