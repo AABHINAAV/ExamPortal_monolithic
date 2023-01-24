@@ -29,17 +29,12 @@
         <mat-card-content>
           <form (submit)="addNewQuestionFunc()" style="margin-top: 20px">
             <!-- content field -->
-            <mat-form-field class="w100">
-              <mat-label>Write Question Content</mat-label>
-              <textarea
-                name="content"
-                placeholder="Enter here"
-                rows="5"
-                required
-                matInput
-                [(ngModel)]="questionData.content"
-              ></textarea>
-            </mat-form-field>
+            <ckeditor
+            [editor]="Editor"
+              name="content"
+              [(ngModel)]="questionData.content"
+              data="Write you question here!"
+            ></ckeditor>
 
             <!-- options -->
             <div class="row">

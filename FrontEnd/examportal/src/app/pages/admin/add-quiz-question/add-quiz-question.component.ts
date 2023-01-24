@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from 'src/services/question.service';
 import Swal from 'sweetalert2';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-add-quiz-question',
@@ -10,6 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-quiz-question.component.css'],
 })
 export class AddQuizQuestionComponent implements OnInit {
+  public Editor = ClassicEditor;
+
   quizId = '';
   quizTitle = '';
 
