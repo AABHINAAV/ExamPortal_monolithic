@@ -1,5 +1,6 @@
 package com.exam.services.impl;
 
+import com.exam.models.exam.Category;
 import com.exam.models.exam.Quiz;
 import com.exam.repo.QuizRepository;
 import com.exam.services.QuizService;
@@ -36,7 +37,22 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
+    public Set<Quiz> getAllQuizesByCategory(Category category) {
+        return this.quizRepository.findByCategory(category);
+    }
+
+    @Override
     public void deleteQuiz(Long quizId) {
         this.quizRepository.deleteById(quizId);
+    }
+
+    @Override
+    public Set<Quiz> getAllActiveQuizes() {
+        return this.quizRepository.findByIsActive(true);
+    }
+
+    @Override
+    public Set<Quiz> getAllActiveQuizesOfCategory(Category category) {
+        return this.quizRepository.findByCategoryAndIsActive(category, true);
     }
 }

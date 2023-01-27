@@ -56,9 +56,10 @@ public class QuestionController {
     // get all questions of specific quiz
     @GetMapping("/getAllQuestionsOfQuiz/{quizId}")
     public ResponseEntity<?> getAllQuestionsOfQuiz(@PathVariable("quizId") Long quizId){
-        Quiz quiz = this.quizService.getQuiz(quizId);
-        Set<Question> questions = quiz.getQuestions();
-        return new ResponseEntity<>(questions, HttpStatus.OK);
+        Quiz quiz = new Quiz();
+        quiz.setqID(quizId);
+        Set<Question> questionsOfQuiz = this.questionService.getQuestionsOfQuiz(quiz);
+        return new ResponseEntity<>(questionsOfQuiz, HttpStatus.OK);
     }
 
     // get required questions of specific quiz

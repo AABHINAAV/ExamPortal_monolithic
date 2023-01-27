@@ -24,7 +24,23 @@ export class QuizService {
     return this.http.get(`${baseUrl}/quiz/getQuiz/${quizId}`);
   }
 
+  getAllQuizesOfCategory(categoryId: any) {
+    return this.http.get(
+      `${baseUrl}/quiz/getAllQuizesOfCategory/${categoryId}`
+    );
+  }
+
   deleteQuizByQuizId(quizId: any) {
     return this.http.delete(`${baseUrl}/quiz/deleteQuiz/${quizId}`);
+  }
+
+  getAllActiveQuizes() {
+    return this.http.get(`${baseUrl}/quiz/getAllActiveQuizes`);
+  }
+
+  getAllActiveQuizesOfCategory(categoryId: any) {
+    return this.http.get(
+      `${baseUrl}/quiz/getAllActiveQuizesOfCategory/${categoryId}`
+    );
   }
 }
