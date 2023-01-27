@@ -18,6 +18,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { LoadQuizComponent } from './pages/user/user_pages/load-quiz/load-quiz.component';
+import { QuizInstructionsComponent } from './pages/user/user_pages/quiz-instructions/quiz-instructions.component';
+import { StartQuizComponent } from './pages/user/user_pages/start-quiz/start-quiz.component';
 
 const routes: Routes = [
   {
@@ -93,9 +95,18 @@ const routes: Routes = [
       },
       {
         path: 'load_quizes/categoryId_/:categoryId',
-        component: LoadQuizComponent
-      }
+        component: LoadQuizComponent,
+      },
+      {
+        path: 'insturctions/quizId_/:quizId',
+        component: QuizInstructionsComponent,
+      },
     ],
+  },
+  {
+    path: 'startQuiz/:quizId',
+    component: StartQuizComponent,
+    canActivate: [UserGuard],
   },
 ];
 
