@@ -11,7 +11,12 @@ import Swal from 'sweetalert2';
 })
 export class StartQuizComponent implements OnInit {
   quizId: any;
-  questionsData: any;
+  questionsData: any = null;
+
+  examSubmitted: any;
+  marksGot = 0;
+  correctAnswers = 0;
+  attempted = 0;
 
   constructor(
     private locationStratergyObj: LocationStrategy,
@@ -23,13 +28,20 @@ export class StartQuizComponent implements OnInit {
     this.preventBackButton();
     this.quizId = this.activateRouteObj.snapshot.params['quizId'];
     this.loadQuestionsOfQuiz();
+
+    this.examSubmitted = false;
   }
 
   loadQuestionsOfQuiz() {
     this.questionServiceObj.getRequiredQuestionsOfQuiz(this.quizId).subscribe(
       (res) => {
-        console.log(res);
         this.questionsData = res;
+
+        this.questionsData.forEach((question: any) => {
+          question['givenAnswer'] = null;
+        });
+
+        console.log(this.questionsData);
       },
       (err) => {
         console.log(err);
@@ -43,5 +55,48 @@ export class StartQuizComponent implements OnInit {
     this.locationStratergyObj.onPopState(() => {
       history.pushState(null, '', location.href);
     });
+  }
+
+  submitQuizFun() {
+    console.log(this.questionsData);
+
+    Swal.fire({
+      icon: 'info',
+      title: 'Do you really want to submit this quiz?',
+      confirmButtonText: 'Submit',
+      confirmButtonColor: 'Blue',
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.evaluateTheQuiz();
+      }
+    });
+  }
+
+  evaluateTheQuiz() {
+    this.questionsData.forEach((question: any) => {
+      if (question.givenAnswer != null) {
+        this.attempted++;
+
+        if (question.givenAnswer == question.answer) {
+          this.correctAnswers++;
+        }
+      }
+    });
+
+    this.marksGot =
+      this.correctAnswers *
+      (this.questionsData[0].quiz.maxMarks /
+        this.questionsData[0].quiz.totalQuestion);
+
+    this.examSubmitted = true;
+
+    console.log('attempted = ' + this.attempted);
+    console.log('correctAnswers = ' + this.correctAnswers);
+    console.log('marksGot = ' + this.marksGot);
+  }
+
+  printTheResultFun() {
+    console.log('this function is used to print the result of quiz');
   }
 }

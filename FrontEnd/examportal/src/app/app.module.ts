@@ -46,6 +46,7 @@ import { UserSidebarComponent } from './pages/user/user-sidebar/user-sidebar.com
 import { LoadQuizComponent } from './pages/user/user_pages/load-quiz/load-quiz.component';
 import { QuizInstructionsComponent } from './pages/user/user_pages/quiz-instructions/quiz-instructions.component';
 import { StartQuizComponent } from './pages/user/user_pages/start-quiz/start-quiz.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { StartQuizComponent } from './pages/user/user_pages/start-quiz/start-qui
     MatSlideToggleModule,
     MatSelectModule,
     CKEditorModule,
+    MatRadioModule,
   ],
   providers: [
     {
