@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { QuestionService } from 'src/services/question.service';
 import { QuizService } from 'src/services/quiz.service';
 import Swal from 'sweetalert2';
 
@@ -17,7 +17,7 @@ export class QuizInstructionsComponent implements OnInit {
     private activatedRouteObj: ActivatedRoute,
     private quizServiceObj: QuizService,
     private routerObj: Router,
-    private snackBarObj: MatSnackBar
+    private questionServiceObj: QuestionService
   ) {}
 
   ngOnInit(): void {
@@ -36,16 +36,41 @@ export class QuizInstructionsComponent implements OnInit {
   }
 
   startQuizFun() {
-    Swal.fire({
-      icon: 'info',
-      title: 'Do you really want to start this quiz?',
-      confirmButtonText: 'Start',
-      confirmButtonColor: 'Blue',
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.routerObj.navigate([`/startQuiz/${this.quizId}`]);
+    this.questionServiceObj.getRequiredQuestionsOfQuiz(this.quizId).subscribe(
+      (res: any) => {
+        console.log(res);
+
+        if (res == null || res.length == 0) {
+          Swal.fire({
+            icon: 'info',
+            title:
+              'This quiz has no questions.\n Please try some other Quiz 😊',
+            confirmButtonText: 'OK',
+            confirmButtonColor: 'Blue',
+          });
+        } else {
+          Swal.fire({
+            icon: 'info',
+            title: 'Do you really want to start this quiz?',
+            confirmButtonText: 'Start',
+            confirmButtonColor: 'Blue',
+            showCancelButton: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.routerObj.navigate([`/startQuiz/${this.quizId}`]);
+            }
+          });
+        }
+      },
+      (err) => {
+        console.log(err);
+
+        Swal.fire(
+          'Error !',
+          'Error in loading questions of this quiz !!',
+          'error'
+        );
       }
-    });
+    );
   }
 }

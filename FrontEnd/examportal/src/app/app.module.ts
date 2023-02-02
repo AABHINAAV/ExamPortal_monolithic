@@ -47,6 +47,7 @@ import { LoadQuizComponent } from './pages/user/user_pages/load-quiz/load-quiz.c
 import { QuizInstructionsComponent } from './pages/user/user_pages/quiz-instructions/quiz-instructions.component';
 import { StartQuizComponent } from './pages/user/user_pages/start-quiz/start-quiz.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSelectModule,
     CKEditorModule,
     MatRadioModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

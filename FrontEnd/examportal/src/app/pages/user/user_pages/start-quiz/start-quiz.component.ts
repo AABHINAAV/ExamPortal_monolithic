@@ -1,6 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from 'src/services/question.service';
 import Swal from 'sweetalert2';
 
@@ -18,10 +18,14 @@ export class StartQuizComponent implements OnInit {
   correctAnswers = 0;
   attempted = 0;
 
+  timerObj: any;
+  timer = 0;
+
   constructor(
     private locationStratergyObj: LocationStrategy,
     private activateRouteObj: ActivatedRoute,
-    private questionServiceObj: QuestionService
+    private questionServiceObj: QuestionService,
+    private routerObj: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +33,18 @@ export class StartQuizComponent implements OnInit {
     this.quizId = this.activateRouteObj.snapshot.params['quizId'];
     this.loadQuestionsOfQuiz();
 
-    this.examSubmitted = false;
+    if (this.questionsData == null || this.questionsData.length == 0) {
+      this.examSubmitted = false;
+
+      this.startTimer();
+    }
+  }
+
+  preventBackButton() {
+    history.pushState(null, '', location.href);
+    this.locationStratergyObj.onPopState(() => {
+      history.pushState(null, '', location.href);
+    });
   }
 
   loadQuestionsOfQuiz() {
@@ -37,9 +52,32 @@ export class StartQuizComponent implements OnInit {
       (res) => {
         this.questionsData = res;
 
+        if (this.questionsData == null || this.questionsData.length == 0) {
+          this.examSubmitted = true;
+          this.questionsData = null;
+
+          Swal.fire({
+            icon: 'info',
+            title:
+              'No Questions available for this quiz !.\nRedirecting you to instructions page😊',
+            confirmButtonText: 'Submit',
+            confirmButtonColor: 'Blue',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.routerObj.navigate([
+                `/user-dashboard/insturctions/quizId_/${this.quizId}`,
+              ]);
+            }
+          });
+
+          return;
+        }
+
         this.questionsData.forEach((question: any) => {
           question['givenAnswer'] = null;
         });
+
+        this.timer = this.questionsData.length * 2 * 60;
 
         console.log(this.questionsData);
       },
@@ -50,14 +88,10 @@ export class StartQuizComponent implements OnInit {
     );
   }
 
-  preventBackButton() {
-    history.pushState(null, '', location.href);
-    this.locationStratergyObj.onPopState(() => {
-      history.pushState(null, '', location.href);
-    });
-  }
-
   submitQuizFun() {
+    // stop the timer working in background
+    clearInterval(this.timerObj);
+
     console.log(this.questionsData);
 
     Swal.fire({
@@ -74,6 +108,7 @@ export class StartQuizComponent implements OnInit {
   }
 
   evaluateTheQuiz() {
+    // checking the answers
     this.questionsData.forEach((question: any) => {
       if (question.givenAnswer != null) {
         this.attempted++;
@@ -84,11 +119,13 @@ export class StartQuizComponent implements OnInit {
       }
     });
 
+    // calculating the marks
     this.marksGot =
       this.correctAnswers *
       (this.questionsData[0].quiz.maxMarks /
         this.questionsData[0].quiz.totalQuestion);
 
+    // showing result
     this.examSubmitted = true;
 
     console.log('attempted = ' + this.attempted);
@@ -98,5 +135,23 @@ export class StartQuizComponent implements OnInit {
 
   printTheResultFun() {
     console.log('this function is used to print the result of quiz');
+  }
+
+  startTimer() {
+    this.timerObj = window.setInterval(() => {
+      if (this.timer <= 0) {
+        clearInterval(this.timerObj);
+        this.evaluateTheQuiz();
+      }
+
+      this.timer--;
+    }, 1000);
+  }
+
+  getFromatedTime() {
+    let minutes = Math.floor(this.timer / 60);
+    let seconds = this.timer % 60;
+
+    return `${minutes}min : ${seconds}sec`;
   }
 }
