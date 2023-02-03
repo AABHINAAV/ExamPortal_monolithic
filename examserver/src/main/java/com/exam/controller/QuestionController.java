@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @CrossOrigin("*")
@@ -55,7 +52,7 @@ public class QuestionController {
 
     // get all questions of specific quiz
     @GetMapping("/getAllQuestionsOfQuiz/{quizId}")
-    public ResponseEntity<?> getAllQuestionsOfQuiz(@PathVariable("quizId") Long quizId){
+    public ResponseEntity<?> getAllQuestionsOfQuiz(@PathVariable("quizId") Long quizId) {
         Quiz quiz = new Quiz();
         quiz.setqID(quizId);
         Set<Question> questionsOfQuiz = this.questionService.getQuestionsOfQuiz(quiz);
@@ -73,8 +70,8 @@ public class QuestionController {
         int requiredSize = Integer.parseInt(quiz.getTotalQuestion());
         int currentSize = questionList.size();
 
-        if(currentSize > requiredSize){
-            questionList = questionList.subList(0, requiredSize+1);
+        if (currentSize > requiredSize) {
+            questionList = questionList.subList(0, requiredSize + 1);
         }
 
         return new ResponseEntity<>(questionList, HttpStatus.OK);
@@ -82,7 +79,36 @@ public class QuestionController {
 
     // delete question
     @DeleteMapping("/deleteQuestion/{questionId}")
-    public void deleteQuestion(@PathVariable("questionId") Long questionId){
+    public void deleteQuestion(@PathVariable("questionId") Long questionId) {
         this.questionService.deleteQuestion(questionId);
+    }
+
+    // evaluate quiz on server side
+    @PostMapping("/evaluateQuizServerSide")
+    public ResponseEntity<?> evaluateQuizServerSide(@RequestBody List<Question> questionsData) {
+        System.out.println("yoyo honey singh");
+
+        Double marksGot = Double.valueOf(0);
+        Integer correctAnswers = 0;
+        Integer attempted = 0;
+
+        for (Question question : questionsData) {
+            if (question.getGivenAnswer() != null) {
+                attempted++;
+
+                Long questionId = question.getQuesId();
+                String answer = this.questionService.getQuestion(questionId).getAnswer();
+
+                if (question.getGivenAnswer().equals(answer)) {
+                    correctAnswers++;
+                }
+            }
+        }
+
+        marksGot = correctAnswers * Double.parseDouble(questionsData.get(0).getQuiz().getMaxMarks()) / Double.parseDouble(questionsData.get(0).getQuiz().getTotalQuestion());
+
+        Map<String, Object> res = Map.of("marksGot", marksGot, "correctAnswers", correctAnswers, "attempted", attempted);
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

@@ -74,7 +74,7 @@ export class StartQuizComponent implements OnInit {
         }
 
         this.questionsData.forEach((question: any) => {
-          question['givenAnswer'] = null;
+          question['answer'] = null;
         });
 
         this.timer = this.questionsData.length * 2 * 60;
@@ -102,7 +102,8 @@ export class StartQuizComponent implements OnInit {
       showCancelButton: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.evaluateTheQuiz();
+        // this.evaluateTheQuiz();
+        this.evluateQuiz_serverSide();
       }
     });
   }
@@ -133,6 +134,32 @@ export class StartQuizComponent implements OnInit {
     console.log('marksGot = ' + this.marksGot);
   }
 
+  evluateQuiz_serverSide() {
+    this.examSubmitted = true;
+    
+    this.questionServiceObj.evaluateQuizServerSide(this.questionsData).subscribe(
+      (res: any) => {
+        console.log(res);
+
+        this.marksGot = res.marksGot;
+        this.attempted = res.attempted;
+        this.correctAnswers = res.correctAnswers;
+
+        console.log('attempted = ' + this.attempted);
+        console.log('correctAnswers = ' + this.correctAnswers);
+        console.log('marksGot = ' + this.marksGot);
+      },
+      (err) => {
+        console.log(err);
+        Swal.fire(
+          'Error !',
+          'Error in quiz evaluation on server side !!',
+          'error'
+        );
+      }
+    );
+  }
+
   printTheResultFun() {
     console.log('this function is used to print the result of quiz');
   }
@@ -141,7 +168,8 @@ export class StartQuizComponent implements OnInit {
     this.timerObj = window.setInterval(() => {
       if (this.timer <= 0) {
         clearInterval(this.timerObj);
-        this.evaluateTheQuiz();
+        // this.evaluateTheQuiz();
+        this.evluateQuiz_serverSide();
       }
 
       this.timer--;
