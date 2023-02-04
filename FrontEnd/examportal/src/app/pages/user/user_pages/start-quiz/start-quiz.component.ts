@@ -73,10 +73,6 @@ export class StartQuizComponent implements OnInit {
           return;
         }
 
-        this.questionsData.forEach((question: any) => {
-          question['answer'] = null;
-        });
-
         this.timer = this.questionsData.length * 2 * 60;
 
         console.log(this.questionsData);
@@ -141,7 +137,7 @@ export class StartQuizComponent implements OnInit {
       (res: any) => {
         console.log(res);
 
-        this.marksGot = res.marksGot;
+        this.marksGot = parseFloat(Number(res.marksGot).toFixed(2));
         this.attempted = res.attempted;
         this.correctAnswers = res.correctAnswers;
 
