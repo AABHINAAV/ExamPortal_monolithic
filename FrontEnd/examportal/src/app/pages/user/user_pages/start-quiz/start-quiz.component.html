@@ -94,15 +94,14 @@
 
             <!-- timer -->
             <mat-card-content>
-              <h2 class="text-center">{{getFromatedTime()}}</h2>
+              <h2 class="text-center">{{ getFromatedTime() }}</h2>
               <mat-spinner
                 mode="determinate"
                 style="margin: auto"
-                [value]="(timer/(questionsData.length*2*60)) * 100"
+                [value]="(timer / (questionsData.length * 2 * 60)) * 100"
               ></mat-spinner>
             </mat-card-content>
             <!--  -->
-
           </mat-card>
         </div>
       </div>
@@ -117,22 +116,30 @@
     <div class="row" style="margin-top: 20px">
       <div class="col-md-6 offset-md-3">
         <mat-card>
-          <mat-card-header>
-            <mat-card-title> Quiz Result </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="text-center">
-            <h1>
-              Marks Got :- <b>{{ marksGot.toFixed(2) }}</b>
-            </h1>
-            <h1>
-              Correct Answers :- <b>{{ correctAnswers }}</b>
-            </h1>
-            <h1>
-              Questions Atemmpted :- <b>{{ attempted }}</b>
-            </h1>
-          </mat-card-content>
+          <div id="resultSection">
+            <mat-card-header>
+              <mat-card-title> Quiz Result </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="text-center">
+              <h1>
+                Marks Got :- <b>{{ marksGot.toFixed(2) }}</b>
+              </h1>
+              <h1>
+                Correct Answers :- <b>{{ correctAnswers }}</b>
+              </h1>
+              <h1>
+                Questions Atemmpted :- <b>{{ attempted }}</b>
+              </h1>
+            </mat-card-content>
+          </div>
           <mat-card-actions class="text-center">
-            <button mat-raised-button color="primary" (click) = "printTheResultFun()">Print</button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="printTheResultFun()"
+            >
+              Print
+            </button>
             <button
               mat-raised-button
               color="accent"
