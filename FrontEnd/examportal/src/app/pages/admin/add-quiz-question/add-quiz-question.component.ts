@@ -133,7 +133,7 @@ export class AddQuizQuestionComponent implements OnInit {
         Swal.fire({
           title: '<h1>Good job!</h1>',
           icon: 'success',
-          html: 'Quiz is successfully added!!',
+          html: 'Question is successfully added!!',
         }).then((result) => {
           this.routerObj.navigate([
             '/admin-dashboard/view_quiz_questions/quizId_/' +

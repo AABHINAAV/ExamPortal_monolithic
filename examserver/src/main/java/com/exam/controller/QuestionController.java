@@ -51,6 +51,7 @@ public class QuestionController {
     }
 
     // get all questions of specific quiz
+    // sare question sirf admin mangaega
     @GetMapping("/getAllQuestionsOfQuiz/{quizId}")
     public ResponseEntity<?> getAllQuestionsOfQuiz(@PathVariable("quizId") Long quizId) {
         Quiz quiz = new Quiz();
@@ -60,11 +61,12 @@ public class QuestionController {
     }
 
     // get required questions of specific quiz
+    // ye student mangaega
     @GetMapping("/getRequiredQuestionsOfQuiz/{quizId}")
     public ResponseEntity<?> getRequiredQuestionsOfQuiz(@PathVariable("quizId") Long quizId) {
         Quiz quiz = this.quizService.getQuiz(quizId);
         Set<Question> questionsSet = quiz.getQuestions();
-        List questionList = new ArrayList(questionsSet);
+        List<Question> questionList = new ArrayList(questionsSet);
         Collections.shuffle(questionList);
 
         int requiredSize = Integer.parseInt(quiz.getTotalQuestion());
@@ -73,6 +75,11 @@ public class QuestionController {
         if (currentSize > requiredSize) {
             questionList = questionList.subList(0, requiredSize + 1);
         }
+
+        // setting all answers to blank
+        questionList.forEach(question -> {
+            question.setAnswer("");
+        });
 
         return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
