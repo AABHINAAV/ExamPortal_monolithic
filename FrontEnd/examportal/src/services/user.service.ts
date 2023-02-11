@@ -31,4 +31,12 @@ export class UserService {
     let url = `${baseUrl}/user/createUser`;
     return this.http.post(url, user);
   }
+
+  //
+  //
+  // update user details
+  public updateUserDetails(userId: any, userDetail: any) {
+    let url = `${baseUrl}/user/updateUser/${userId}`;
+    return this.http.put(url, userDetail);
+  }
 }

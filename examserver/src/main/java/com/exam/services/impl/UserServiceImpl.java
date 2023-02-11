@@ -73,4 +73,14 @@ public class UserServiceImpl implements UserService {
 		System.out.println("deleting user on basis of user name : " + userName);
 		this.userRepository.deleteByUsername(userName);
 	}
+
+	@Override
+	public User getUserByUserId(Long userId) {
+		return this.userRepository.findById(userId).get();
+	}
+
+	@Override
+	public User updateUserDetails(User userDetails) {
+		return this.userRepository.save(userDetails);
+	}
 }

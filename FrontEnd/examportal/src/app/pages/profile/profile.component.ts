@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/services/login.service';
 
 @Component({
@@ -9,9 +10,28 @@ import { LoginService } from 'src/services/login.service';
 export class ProfileComponent implements OnInit {
   user: any;
 
-  constructor(private loginServiceObj: LoginService) {}
+  constructor(
+    private loginServiceObj: LoginService,
+    private routerObj: Router
+  ) {}
 
   ngOnInit(): void {
     this.user = this.loginServiceObj.getUserDetails();
+  }
+
+  routeToUpdateDetailsPageFun() {
+    let userRole = this.loginServiceObj.getUserRole();
+
+    if (userRole == 'ADMIN') {
+      console.log('navigating to admin profile update page');
+      this.routerObj.navigate([
+        '/admin-dashboard/updateProfile/user_id/' + this.user.id,
+      ]);
+    } else {
+      console.log('navigating to normal user profile update page');
+      this.routerObj.navigate([
+        '/user-dashboard/updateProfile/user_id/' + this.user.id,
+      ]);
+    }
   }
 }

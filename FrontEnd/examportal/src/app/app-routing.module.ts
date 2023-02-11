@@ -16,6 +16,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { LoadQuizComponent } from './pages/user/user_pages/load-quiz/load-quiz.component';
 import { QuizInstructionsComponent } from './pages/user/user_pages/quiz-instructions/quiz-instructions.component';
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+      },
+      {
+        path: 'updateProfile/user_id/:userId',
+        component: UpdateProfileComponent,
       },
       {
         path: 'view_categories',
@@ -92,6 +97,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+      },
+      {
+        path: 'updateProfile/user_id/:userId',
+        component: UpdateProfileComponent,
       },
       {
         path: 'load_quizes/categoryId_/:categoryId',

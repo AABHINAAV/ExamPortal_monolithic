@@ -9,7 +9,7 @@
             alt=""
             class="profile-image"
           />
-          <h1 class="mt20">{{user.firstName}} {{user.lastName}}</h1>
+          <h1 class="mt20">{{ user.firstName }} {{ user.lastName }}</h1>
         </div>
         <div class="text-center">
           <div class="container col-md-10">
@@ -17,31 +17,31 @@
             <table>
               <tr>
                 <td>Username</td>
-                <td>{{user.username}}</td>
+                <td>{{ user.username }}</td>
               </tr>
               <tr>
                 <td>UserId</td>
-                <td>EXAM{{user.id}}</td>
+                <td>EXAM{{ user.id }}</td>
               </tr>
               <tr>
                 <td>Role</td>
-                <td>{{user.authorities[0].authority}}</td>
+                <td>{{ user.authorities[0].authority }}</td>
               </tr>
               <tr>
                 <td>Status</td>
-                <td>{{user.enabled ? 'ACTIVE' : 'INACTIVE'}}</td>
+                <td>{{ user.enabled ? "ACTIVE" : "INACTIVE" }}</td>
               </tr>
               <tr>
                 <td>Phone Number</td>
-                <td>{{user.phone}}</td>
+                <td>{{ user.phone }}</td>
               </tr>
               <tr>
                 <td>First Name</td>
-                <td>{{user.firstName}}</td>
+                <td>{{ user.firstName }}</td>
               </tr>
               <tr>
                 <td>Last Name</td>
-                <td>{{user.lastName}}</td>
+                <td>{{ user.lastName }}</td>
               </tr>
             </table>
           </div>
@@ -50,7 +50,13 @@
     </div>
   </mat-card-content>
   <mat-card-actions class="text-center">
-    <button mat-raised-button color="primary">UPDATE</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="routeToUpdateDetailsPageFun()"
+    >
+      UPDATE
+    </button>
     <button mat-raised-button color="accent">SHARE</button>
   </mat-card-actions>
 </mat-card>

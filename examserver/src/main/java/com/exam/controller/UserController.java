@@ -90,4 +90,24 @@ public class UserController {
         this.userService.deleteUserByUserName(userName);
         return new ResponseEntity<>("User with username : " + userName + " has been deleted successfully", HttpStatus.OK);
     }
+
+    @GetMapping("getUserByUserId/{userId}")
+    public ResponseEntity<?> getUserByUserId(@PathVariable("userId") Long userId) {
+        User res = this.userService.getUserByUserId(userId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @PutMapping("/updateUser/{userId}")
+    public ResponseEntity<?> updateUserDetails(@PathVariable("userId") Long userId, @RequestBody User userDetails) {
+        User oldDetails = this.userService.getUserByUserId(userId);
+
+        userDetails.setUsername(oldDetails.getUsername());
+        userDetails.setId(oldDetails.getId());
+        userDetails.setPassword(oldDetails.getPassword());
+        userDetails.setEmail(oldDetails.getEmail());
+        userDetails.setEnabled(oldDetails.isEnabled());
+
+        User res = this.userService.updateUserDetails(userDetails);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
 }

@@ -49,6 +49,7 @@ import { StartQuizComponent } from './pages/user/user_pages/start-quiz/start-qui
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
+import { UpdateProfileComponent } from './pages/update-profile/update-profile.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
     LoadQuizComponent,
     QuizInstructionsComponent,
     StartQuizComponent,
+    UpdateProfileComponent,
   ],
   imports: [
     BrowserModule,

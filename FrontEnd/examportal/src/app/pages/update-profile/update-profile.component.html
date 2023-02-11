@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="container text-center">
+    <button
+      mat-flat-button
+      color="accent"
+      style="margin-left: 1rem; margin-bottom: 10px"
+      [routerLink]=""
+    >
+      Back
+    </button>
+  </div>
+</div>
+
+<div class="bootstrap-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <mat-card>
+          <div class="container text-center">
+            <img src="../../../assets/images/logo.png" alt="" />
+          </div>
+          <h1 class="text-center">Register Here !!!</h1>
+
+          <form (ngSubmit)="updateDetailsFun()">
+
+            <!-- first name field -->
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input
+                type="text"
+                placeholder="Enter here"
+                required
+                name="firstName"
+                [(ngModel)]="userDetails.firstName"
+                matInput
+              />
+            </mat-form-field>
+
+            <!-- last name field -->
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input
+                type="text"
+                placeholder="Enter here"
+                required
+                name="lastName"
+                [(ngModel)]="userDetails.lastName"
+                matInput
+              />
+            </mat-form-field>
+
+            <!-- phone field -->
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input
+                type="number"
+                placeholder="Enter here"
+                required
+                name="phone"
+                [(ngModel)]="userDetails.phone"
+                matInput
+              />
+            </mat-form-field>
+
+            <div class="container text-center">
+              <button type="submit" mat-raised-button color="primary">
+                UPDATE
+              </button>
+            </div>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
